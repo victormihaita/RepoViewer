@@ -32,11 +32,11 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
 
         params = [
-            .consumerKey:     Utils.getCredentials(for: "consumerKey")!,
-            .consumerSecret:  Utils.getCredentials(for: "consumerSecret")!,
-            .authorizeUrl:    Utils.getCredentials(for: "authorizeUrl")!,
-            .accessTokenUrl:  Utils.getCredentials(for: "accessTokenUrl")!,
-            .responseType:    Utils.getCredentials(for: "responseType")!
+            .consumerKey:     Utils.getCredentials(in: "Auth", for: "consumerKey")!,
+            .consumerSecret:  Utils.getCredentials(in: "Auth", for: "consumerSecret")!,
+            .authorizeUrl:    Utils.getCredentials(in: "Auth", for: "authorizeUrl")!,
+            .accessTokenUrl:  Utils.getCredentials(in: "Auth", for: "accessTokenUrl")!,
+            .responseType:    Utils.getCredentials(in: "Auth", for: "responseType")!
         ]
 
         signInButton.rx.tap
@@ -57,7 +57,7 @@ class AuthViewController: UIViewController {
         let state = "GITHUB"
 
         oAuthSwift.authorize(
-            withCallbackURL: URL(string: Utils.getCredentials(for: "callbackURL")!),
+            withCallbackURL: URL(string: Utils.getCredentials(in: "Auth", for: "callbackURL")!),
             scope: "user,repo",
             state: state,
             success: { credential, response, parameters in

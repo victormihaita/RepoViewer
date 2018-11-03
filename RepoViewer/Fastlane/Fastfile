@@ -1,0 +1,8 @@
+fastlane_version "2.93.0"
+skip_docs
+
+desc "Download GraphQL schema"
+lane :download_schema do
+  sh("npm install -g apollo")
+  sh("apollo schema:download ../RepoViewer/Architecture/API/Generated/schema.json --endpoint=https://api.github.com/graphql --header=\"Authorization: Bearer 7c6ddb501e2b3dcf7c8b8b5005cf1d4b905a32d4\"")
+end

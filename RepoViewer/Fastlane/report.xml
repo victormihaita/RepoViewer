@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: Verifying fastlane version" time="0.004842">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: npm install -g apollo" time="5.453551">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: apollo schema:download ../RepoViewer/Architecture/API/Generated/schema.json --endpoint=https://api.github.com/graphql --header=&quot;Authorization: Bearer 7c6ddb501e2b3dcf7c8b8b5005cf1d4b905a32d4&quot;" time="3.39333">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
