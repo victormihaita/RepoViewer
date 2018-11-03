@@ -33,10 +33,10 @@ class Utils {
         parentVC.present(alert, animated: true, completion: nil)
     }
 
-    static func getCredentials(for key: String) -> String? {
-        guard let path = Bundle.main.path(forResource: "Auth", ofType: "plist"),
+    static func getCredentials(in group: String, for key: String) -> String? {
+        guard let path = Bundle.main.path(forResource: "Credentials", ofType: "plist"),
                 let dict = NSDictionary(contentsOfFile: path) as? [String: Any],
-                let authCredentials = dict["AuthCredentials"] as? [String: String] else { return nil }
+                let authCredentials = dict[group] as? [String: String] else { return nil }
 
         return authCredentials[key]
     }
