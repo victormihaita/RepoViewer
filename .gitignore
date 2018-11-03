@@ -68,4 +68,4 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
-RepoViewer/RepoViewer/Architecture/API/Generated/schema.json
+RepoViewer/Fastlane
