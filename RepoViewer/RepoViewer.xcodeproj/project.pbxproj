@@ -101,8 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				BA0E5B6E218CFF190013F5A6 /* Architecture */,
-				BA0E5B75218D00560013F5A6 /* Resources */,
 				BA763199218DD2F900929175 /* Library */,
+				BA0E5B75218D00560013F5A6 /* Resources */,
 				BA0E5B6F218CFF870013F5A6 /* Storyboards */,
 				BA0E5B68218CFE5D0013F5A6 /* Info.plist */,
 			);
@@ -195,8 +195,8 @@
 		BA7631A8218DF62700929175 /* ApiClient */ = {
 			isa = PBXGroup;
 			children = (
-				BA7631AB218DFB0200929175 /* RxApollo.swift */,
 				BA7631A9218DF75E00929175 /* ApiClient.swift */,
+				BA7631AB218DFB0200929175 /* RxApollo.swift */,
 			);
 			path = ApiClient;
 			sourceTree = "<group>";
