@@ -1,0 +1,23 @@
+query Repositories($first: Int) {
+    viewer {
+        repositories (first: $first) {
+            edges {
+                cursor
+                node {
+                    id
+                    name
+                    description
+                    isPrivate
+                    languages (first: 1) {
+                        nodes {
+                            name
+                        }
+                    }
+                    stargazers {
+                        totalCount
+                    }
+                }
+            }
+        }
+    }
+}

@@ -24,6 +24,12 @@
 		BA7631AC218DFB0300929175 /* RxApollo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7631AB218DFB0200929175 /* RxApollo.swift */; };
 		BA7631AE218DFB4F00929175 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = BA7631AD218DFB4F00929175 /* schema.json */; };
 		BA7631B1218DFBC300929175 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7631B0218DFBC200929175 /* API.swift */; };
+		BACCDC96218E660200EF70BF /* RepoTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDC94218E660200EF70BF /* RepoTableCell.swift */; };
+		BACCDC97218E660200EF70BF /* RepoTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BACCDC95218E660200EF70BF /* RepoTableCell.xib */; };
+		BACCDC99218E662F00EF70BF /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDC98218E662F00EF70BF /* Reusable.swift */; };
+		BACCDC9C218E665D00EF70BF /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDC9B218E665D00EF70BF /* NibLoadable.swift */; };
+		BACCDC9F218E685000EF70BF /* Repositories.graphql in Resources */ = {isa = PBXBuildFile; fileRef = BACCDC9E218E685000EF70BF /* Repositories.graphql */; };
+		BACCDCA1218E6D9800EF70BF /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDCA0218E6D9800EF70BF /* Repository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +53,12 @@
 		BA7631AB218DFB0200929175 /* RxApollo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxApollo.swift; sourceTree = "<group>"; };
 		BA7631AD218DFB4F00929175 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		BA7631B0218DFBC200929175 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		BACCDC94218E660200EF70BF /* RepoTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoTableCell.swift; sourceTree = "<group>"; };
+		BACCDC95218E660200EF70BF /* RepoTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepoTableCell.xib; sourceTree = "<group>"; };
+		BACCDC98218E662F00EF70BF /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		BACCDC9B218E665D00EF70BF /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		BACCDC9E218E685000EF70BF /* Repositories.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Repositories.graphql; sourceTree = "<group>"; };
+		BACCDCA0218E6D9800EF70BF /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		D9A45FB7FB4C0586148F8202 /* Pods-RepoViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RepoViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,6 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				BA7631A0218DD45700929175 /* MainViewController.swift */,
+				BACCDC93218E65D600EF70BF /* ViewCells */,
+				BACCDC9D218E683400EF70BF /* Model */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -167,6 +181,7 @@
 		BA763199218DD2F900929175 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				BACCDC9A218E664900EF70BF /* Protocols */,
 				BA76319C218DD32700929175 /* UserDefaultsManager.swift */,
 				BA7631A2218DDDFB00929175 /* Utils.swift */,
 				BA7631A4218DE19300929175 /* Credentials.plist */,
@@ -199,6 +214,33 @@
 				BA7631AB218DFB0200929175 /* RxApollo.swift */,
 			);
 			path = ApiClient;
+			sourceTree = "<group>";
+		};
+		BACCDC93218E65D600EF70BF /* ViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				BACCDC94218E660200EF70BF /* RepoTableCell.swift */,
+				BACCDC95218E660200EF70BF /* RepoTableCell.xib */,
+			);
+			path = ViewCells;
+			sourceTree = "<group>";
+		};
+		BACCDC9A218E664900EF70BF /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				BACCDC98218E662F00EF70BF /* Reusable.swift */,
+				BACCDC9B218E665D00EF70BF /* NibLoadable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		BACCDC9D218E683400EF70BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BACCDC9E218E685000EF70BF /* Repositories.graphql */,
+				BACCDCA0218E6D9800EF70BF /* Repository.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,11 +305,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA0E5B74218D00150013F5A6 /* Auth.storyboard in Resources */,
+				BACCDC9F218E685000EF70BF /* Repositories.graphql in Resources */,
 				BA0E5B67218CFE5D0013F5A6 /* LaunchScreen.storyboard in Resources */,
 				BA7631A5218DE19300929175 /* Credentials.plist in Resources */,
 				BA0E5B64218CFE5D0013F5A6 /* Assets.xcassets in Resources */,
 				BA7631AE218DFB4F00929175 /* schema.json in Resources */,
 				BA0E5B62218CFE5B0013F5A6 /* Main.storyboard in Resources */,
+				BACCDC97218E660200EF70BF /* RepoTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +334,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate RepoViewer/Architecture/API/Generated/API.swift --queries=\"$(find . -name '*.graphql')\" --passthroughCustomScalars --schema=Sources/API/Generated/schema.json\n";
+			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate RepoViewer/Architecture/API/Generated/API.swift --queries=\"$(find . -name '*.graphql')\" --passthroughCustomScalars --schema=RepoViewer/Architecture/API/Generated/schema.json\n";
 		};
 		EA9CA157AC5542C58636C82D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -351,15 +395,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BACCDC99218E662F00EF70BF /* Reusable.swift in Sources */,
 				BA76319F218DD3E700929175 /* Storyboard.swift in Sources */,
+				BACCDC96218E660200EF70BF /* RepoTableCell.swift in Sources */,
 				BA0AEA3D218D1221008AC723 /* AuthViewController.swift in Sources */,
 				BA0E5B5D218CFE5B0013F5A6 /* AppDelegate.swift in Sources */,
 				BA7631AA218DF75E00929175 /* ApiClient.swift in Sources */,
 				BA7631B1218DFBC300929175 /* API.swift in Sources */,
+				BACCDCA1218E6D9800EF70BF /* Repository.swift in Sources */,
 				BA7631A3218DDDFB00929175 /* Utils.swift in Sources */,
 				BA7631AC218DFB0300929175 /* RxApollo.swift in Sources */,
 				BA7631A1218DD45700929175 /* MainViewController.swift in Sources */,
 				BA76319D218DD32700929175 /* UserDefaultsManager.swift in Sources */,
+				BACCDC9C218E665D00EF70BF /* NibLoadable.swift in Sources */,
 				BA0AEA45218DD1E6008AC723 /* RootViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
