@@ -30,6 +30,9 @@
 		BACCDC9C218E665D00EF70BF /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDC9B218E665D00EF70BF /* NibLoadable.swift */; };
 		BACCDC9F218E685000EF70BF /* Repositories.graphql in Resources */ = {isa = PBXBuildFile; fileRef = BACCDC9E218E685000EF70BF /* Repositories.graphql */; };
 		BACCDCA1218E6D9800EF70BF /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDCA0218E6D9800EF70BF /* Repository.swift */; };
+		BACCDCA5218E760500EF70BF /* RepositoriesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDCA4218E760500EF70BF /* RepositoriesService.swift */; };
+		BACCDCA7218E783A00EF70BF /* RepositoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDCA6218E783A00EF70BF /* RepositoriesViewModel.swift */; };
+		BACCDCA9218E828F00EF70BF /* RepositoriesTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDCA8218E828F00EF70BF /* RepositoriesTableDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +62,9 @@
 		BACCDC9B218E665D00EF70BF /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		BACCDC9E218E685000EF70BF /* Repositories.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Repositories.graphql; sourceTree = "<group>"; };
 		BACCDCA0218E6D9800EF70BF /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		BACCDCA4218E760500EF70BF /* RepositoriesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesService.swift; sourceTree = "<group>"; };
+		BACCDCA6218E783A00EF70BF /* RepositoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewModel.swift; sourceTree = "<group>"; };
+		BACCDCA8218E828F00EF70BF /* RepositoriesTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesTableDataSource.swift; sourceTree = "<group>"; };
 		D9A45FB7FB4C0586148F8202 /* Pods-RepoViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RepoViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -164,6 +170,9 @@
 			isa = PBXGroup;
 			children = (
 				BA7631A0218DD45700929175 /* MainViewController.swift */,
+				BACCDCA8218E828F00EF70BF /* RepositoriesTableDataSource.swift */,
+				BACCDCA6218E783A00EF70BF /* RepositoriesViewModel.swift */,
+				BACCDCA4218E760500EF70BF /* RepositoriesService.swift */,
 				BACCDC93218E65D600EF70BF /* ViewCells */,
 				BACCDC9D218E683400EF70BF /* Model */,
 			);
@@ -345,7 +354,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
+				"${BUILT_PRODUCTS_DIR}/ApolloAlamofire/ApolloAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -355,7 +366,9 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ApolloAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -402,12 +415,15 @@
 				BA0E5B5D218CFE5B0013F5A6 /* AppDelegate.swift in Sources */,
 				BA7631AA218DF75E00929175 /* ApiClient.swift in Sources */,
 				BA7631B1218DFBC300929175 /* API.swift in Sources */,
+				BACCDCA5218E760500EF70BF /* RepositoriesService.swift in Sources */,
 				BACCDCA1218E6D9800EF70BF /* Repository.swift in Sources */,
 				BA7631A3218DDDFB00929175 /* Utils.swift in Sources */,
+				BACCDCA7218E783A00EF70BF /* RepositoriesViewModel.swift in Sources */,
 				BA7631AC218DFB0300929175 /* RxApollo.swift in Sources */,
 				BA7631A1218DD45700929175 /* MainViewController.swift in Sources */,
 				BA76319D218DD32700929175 /* UserDefaultsManager.swift in Sources */,
 				BACCDC9C218E665D00EF70BF /* NibLoadable.swift in Sources */,
+				BACCDCA9218E828F00EF70BF /* RepositoriesTableDataSource.swift in Sources */,
 				BA0AEA45218DD1E6008AC723 /* RootViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

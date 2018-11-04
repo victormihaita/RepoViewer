@@ -7,6 +7,7 @@
 //
 
 import Apollo
+import ApolloAlamofire
 import RxSwift
 
 class ApiClient {
@@ -16,7 +17,12 @@ class ApiClient {
     private let apolloURL = URL(string: Utils.getCredentials(in: "GraphQL", for: "apiURL")!)
 
     init() {
-        apollo = ApolloClient(url: apolloURL!)
+        var headers: [String: String] = [:]
+        headers["Authorization"] = "Bearer \(UserDefaultsManager.getUserToken() ?? "INVALID")"
+        let url = URL(string: "https://api.github.com/graphql")
+
+        let transport = AlamofireTransport(url: url!, headers: headers)
+        apollo = ApolloClient(networkTransport: transport)
         apollo.cacheKeyForObject = { $0["id"] }
     }
 

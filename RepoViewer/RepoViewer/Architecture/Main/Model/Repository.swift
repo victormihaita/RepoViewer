@@ -7,14 +7,19 @@
 //
 
 import Foundation
+import UIKit
 
 struct Repository {
+
+    struct Language: Hashable {
+        let name: String!
+    }
 
     let id: String!
     let name: String!
     let description: String?
     let isPrivate: Bool!
-    let language: String?
+    let languages: [Language]?
     let stars: Int!
 
     init(_ data: RepositoriesQuery.Data.Viewer.Repository.Edge.Node) {
@@ -22,7 +27,7 @@ struct Repository {
         name = data.name
         description = data.description
         isPrivate = data.isPrivate
-        language = data.languages?.nodes?.first??.name
+        languages = data.languages?.nodes?.map { Language(name: $0?.name) }
         stars = data.stargazers.totalCount
     }
 

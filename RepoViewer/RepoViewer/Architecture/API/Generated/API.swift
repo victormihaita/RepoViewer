@@ -4,7 +4,7 @@ import Apollo
 
 public final class RepositoriesQuery: GraphQLQuery {
   public let operationDefinition =
-    "query Repositories($first: Int) {\n  viewer {\n    __typename\n    repositories(first: $first) {\n      __typename\n      edges {\n        __typename\n        cursor\n        node {\n          __typename\n          id\n          name\n          description\n          isPrivate\n          languages(first: 1) {\n            __typename\n            nodes {\n              __typename\n              name\n            }\n          }\n          stargazers {\n            __typename\n            totalCount\n          }\n        }\n      }\n    }\n  }\n}"
+    "query Repositories($first: Int) {\n  viewer {\n    __typename\n    repositories(first: $first) {\n      __typename\n      edges {\n        __typename\n        cursor\n        node {\n          __typename\n          id\n          name\n          description\n          isPrivate\n          languages(first: 3) {\n            __typename\n            nodes {\n              __typename\n              name\n            }\n          }\n          stargazers {\n            __typename\n            totalCount\n          }\n        }\n      }\n    }\n  }\n}"
 
   public var first: Int?
 
@@ -174,7 +174,7 @@ public final class RepositoriesQuery: GraphQLQuery {
               GraphQLField("name", type: .nonNull(.scalar(String.self))),
               GraphQLField("description", type: .scalar(String.self)),
               GraphQLField("isPrivate", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("languages", arguments: ["first": 1], type: .object(Language.selections)),
+              GraphQLField("languages", arguments: ["first": 3], type: .object(Language.selections)),
               GraphQLField("stargazers", type: .nonNull(.object(Stargazer.selections))),
             ]
 

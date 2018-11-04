@@ -8,7 +8,7 @@ query Repositories($first: Int) {
                     name
                     description
                     isPrivate
-                    languages (first: 1) {
+                    languages (first: 3) {
                         nodes {
                             name
                         }

@@ -26,17 +26,23 @@
                             <constraint firstAttribute="height" constant="20" id="p3c-uX-7oH"/>
                         </constraints>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="r2R-Dr-lgr">
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="r2R-Dr-lgr">
                         <rect key="frame" x="30" y="15" width="297" height="110"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwz-Sd-doF">
-                                <rect key="frame" x="0.0" y="0.0" width="297" height="50.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="297" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTY-Ob-bIK">
-                                <rect key="frame" x="0.0" y="57.5" width="297" height="52.5"/>
+                                <rect key="frame" x="0.0" y="48.5" width="297" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfi-4D-Ab8">
+                                <rect key="frame" x="0.0" y="93" width="297" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -54,7 +60,13 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="178.40000000000001" y="197.00149925037482"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="bTY-Ob-bIK" id="nbV-jr-aXJ"/>
+                <outlet property="isPrivateBadgeView" destination="qxt-wn-BMO" id="rXY-HP-r4q"/>
+                <outlet property="languagesLabel" destination="xfi-4D-Ab8" id="wYi-aT-oXO"/>
+                <outlet property="nameLabel" destination="Dwz-Sd-doF" id="VRm-Mf-FhE"/>
+            </connections>
+            <point key="canvasLocation" x="10" y="244"/>
         </tableViewCell>
     </objects>
 </document>
