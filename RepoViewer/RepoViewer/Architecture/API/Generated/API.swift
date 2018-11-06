@@ -4,16 +4,18 @@ import Apollo
 
 public final class RepositoriesQuery: GraphQLQuery {
   public let operationDefinition =
-    "query Repositories($first: Int) {\n  viewer {\n    __typename\n    repositories(first: $first) {\n      __typename\n      edges {\n        __typename\n        cursor\n        node {\n          __typename\n          id\n          name\n          description\n          isPrivate\n          languages(first: 3) {\n            __typename\n            nodes {\n              __typename\n              name\n            }\n          }\n          stargazers {\n            __typename\n            totalCount\n          }\n        }\n      }\n    }\n  }\n}"
+    "query Repositories($first: Int, $after: String) {\n  viewer {\n    __typename\n    repositories(first: $first, after: $after) {\n      __typename\n      edges {\n        __typename\n        cursor\n        node {\n          __typename\n          id\n          name\n          description\n          isPrivate\n          languages(first: 4) {\n            __typename\n            nodes {\n              __typename\n              name\n            }\n          }\n          stargazers {\n            __typename\n            totalCount\n          }\n        }\n      }\n    }\n  }\n}"
 
   public var first: Int?
+  public var after: String?
 
-  public init(first: Int? = nil) {
+  public init(first: Int? = nil, after: String? = nil) {
     self.first = first
+    self.after = after
   }
 
   public var variables: GraphQLMap? {
-    return ["first": first]
+    return ["first": first, "after": after]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -48,7 +50,7 @@ public final class RepositoriesQuery: GraphQLQuery {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("repositories", arguments: ["first": GraphQLVariable("first")], type: .nonNull(.object(Repository.selections))),
+        GraphQLField("repositories", arguments: ["first": GraphQLVariable("first"), "after": GraphQLVariable("after")], type: .nonNull(.object(Repository.selections))),
       ]
 
       public private(set) var resultMap: ResultMap
@@ -174,7 +176,7 @@ public final class RepositoriesQuery: GraphQLQuery {
               GraphQLField("name", type: .nonNull(.scalar(String.self))),
               GraphQLField("description", type: .scalar(String.self)),
               GraphQLField("isPrivate", type: .nonNull(.scalar(Bool.self))),
-              GraphQLField("languages", arguments: ["first": 3], type: .object(Language.selections)),
+              GraphQLField("languages", arguments: ["first": 4], type: .object(Language.selections)),
               GraphQLField("stargazers", type: .nonNull(.object(Stargazer.selections))),
             ]
 

@@ -11,8 +11,10 @@ import RxSwift
 
 class RepositoriesService {
 
-    public func fetchRepositories(count: Int) -> Maybe<[Repository]> {
-        let query = RepositoriesQuery(first: count)
+    typealias RepoQueryResult = (repos: [Repository], cursor: String?)
+
+    public func fetchRepositories(count: Int, cursor: String?) -> Maybe<RepoQueryResult> {
+        let query = RepositoriesQuery(first: count, after: cursor)
 
         return ApiClient.shared.fetch(query, cachePolicy: .returnCacheDataAndFetch)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
@@ -20,7 +22,7 @@ class RepositoriesService {
             .observeOn(MainScheduler.instance)
     }
 
-    private func parse(_ data: RepositoriesQuery.Data) -> [Repository] {
+    private func parse(_ data: RepositoriesQuery.Data) -> RepoQueryResult {
         var repositories: [Repository] = []
         if let repos = data.viewer.repositories.edges {
             for repo in repos {
@@ -30,7 +32,7 @@ class RepositoriesService {
             }
         }
 
-        return repositories
+        return (repos: repositories, cursor: data.viewer.repositories.edges?.last??.cursor)
     }
 
 }

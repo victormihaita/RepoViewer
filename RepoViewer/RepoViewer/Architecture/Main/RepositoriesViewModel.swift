@@ -11,62 +11,52 @@ import RxSwift
 
 class RepositoriesViewModel {
 
-    private var repoService: RepositoriesService!
-    private let reposToFetch = 100
-    private let disposeBag = DisposeBag()
+    private var repoService: RepositoriesService?
+    private var disposableRepos: Disposable?
+    private let reposToFetch = 10
+    private var cursor: String?
 
-    typealias reposResult = (repos: [Repository.Language: [Repository]], languages: Set<Repository.Language>)
-    private var repositories = PublishSubject<reposResult>()
+    private var repositories = PublishSubject<[Repository.Language: [Repository]]>()
+    private var fetchedRepos: [Repository] = []
 
     init() {
         repoService = RepositoriesService()
         fetchRepositories()
     }
 
-    public func getRepositories() -> PublishSubject<reposResult> {
+    public func getRepositories() -> PublishSubject<[Repository.Language: [Repository]]> {
         return repositories
     }
 
     private func fetchRepositories() {
-        repoService.fetchRepositories(count: reposToFetch)
-            .subscribe(
-                onSuccess: { repos in
-                    var repoDict: [Repository.Language: [Repository]] = [:]
-                    var languages: Set<Repository.Language> = []
-                    repos.forEach { repo in
-                        if let langs = repo.languages {
-                            langs.forEach {
-                                if var repositories = repoDict[$0] {
-                                     repositories.append(repo)
-                                } else {
-                                    repoDict[$0] = [repo]
-                                }
+        disposableRepos?.dispose()
 
-                                languages.insert($0)
-                            }
-                        }
-                    }
-                    self.repositories.onNext((repos: repoDict, languages: languages))
+        disposableRepos = repoService?.fetchRepositories(count: reposToFetch, cursor: cursor)
+            .subscribe(
+                onSuccess: { repos, newCursor in
+                    self.fetchedRepos.append(contentsOf: repos)
+                    self.repositories.onNext(self.sortedList(for: self.fetchedRepos))
+                    self.cursor = newCursor
+                    newCursor != nil ? self.fetchRepositories() : self.repositories.onCompleted()
                 },
-                onError: { self.handle($0) })
-            .disposed(by: disposeBag)
+                onError: { self.repositories.onError($0) })
     }
 
-    private func handle(_ error: Error) {
-//        switch error {
-//        case RxApolloError.graphQLErrors(let errors):
-////            Analytics.shared.track(.error, properties: [
-////                .errorMessage: errors.first?.errorDescription ?? error.localizedDescription,
-////                .errorType: "API",
-////                .errorScreen: "Gallery Details"
-////            ])
-//        default:
-////            Analytics.shared.track(.error, properties: [
-////                .errorMessage: error.localizedDescription,
-////                .errorType: "API",
-////                .errorScreen: "Gallery Details"
-////                ])
-//        }
+    private func sortedList(for repos: [Repository]) -> [Repository.Language: [Repository]] {
+        var repoDict: [Repository.Language: [Repository]] = [:]
+        repos.forEach { repo in
+            if let langs = repo.languages {
+                langs.forEach {
+                    if var repository = repoDict[$0] {
+                        repository.append(repo)
+                    } else {
+                        repoDict[$0] = [repo]
+                    }
+                }
+            }
+        }
+
+        return repoDict
     }
 
 }

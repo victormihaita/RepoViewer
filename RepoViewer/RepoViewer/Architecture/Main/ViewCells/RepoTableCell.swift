@@ -14,6 +14,8 @@ class RepoTableCell: UITableViewCell, Reusable, NibLoadable {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var isPrivateBadgeView: UIImageView!
     @IBOutlet weak var languagesLabel: UILabel!
+    @IBOutlet weak var starCountLabel: UILabel!
+    @IBOutlet weak var starImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,14 +35,22 @@ class RepoTableCell: UITableViewCell, Reusable, NibLoadable {
             var languagesString = ""
             languages.forEach { language in
                 if let name = language.name {
-                    languagesString += "\(name), "
+                    languagesString += "\(name)   "
                 }
             }
             languagesLabel.isHidden = false
-            languagesLabel.text = languagesString
+            languagesLabel.text = languagesString.uppercased()
         } else {
             languagesLabel.isHidden = true
         }
+
+        if let stars = repo.stars {
+            starCountLabel.text = "\(stars)"
+        }
+
+        starCountLabel.isHidden = repo.stars > 0 ? false : true
+        starImageView.image = repo.stars > 0 ? #imageLiteral(resourceName: "icon_star") : #imageLiteral(resourceName: "icon_star_empty")
+        isPrivateBadgeView.isHidden = repo.isPrivate ? false : true
 
     }
     
