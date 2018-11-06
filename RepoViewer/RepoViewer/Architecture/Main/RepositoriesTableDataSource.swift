@@ -11,38 +11,25 @@ import UIKit
 
 class RepositoriesTableDataSource: NSObject, UITableViewDataSource {
 
-    public var repositories: [Repository.Language: [Repository]] = [:] {
-        didSet {
-             languages.removeAll()
-             repositories.keys.forEach({
-                self.languages.append($0)
-                self.repositories[$0]?.sort(by: { $0.stars > $1.stars })
-             })
-        }
-    }
-
-    private var languages: [Repository.Language] = []
+    public var repositories: [[Repository]] = []
+    public var languages: [String] = []
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let repos = repositories[languages[section]] {
-            return repos.count
-        }
-        return 0
+        return repositories[section].count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return languages.count
+        return repositories.count
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return languages[section].name
+        return languages[section]
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: RepoTableCell = tableView.dequeueCell(for: indexPath)
-        if let repos = repositories[languages[indexPath.section]] {
-            cell.config(with: repos[indexPath.row])
-        }
+        let repo = repositories[indexPath.section][indexPath.row]
+        cell.config(with: repo)
         return cell
     }
 

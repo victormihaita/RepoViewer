@@ -48,7 +48,6 @@ class RepoTableCell: UITableViewCell, Reusable, NibLoadable {
             starCountLabel.text = "\(stars)"
         }
 
-        starCountLabel.isHidden = repo.stars > 0 ? false : true
         starImageView.image = repo.stars > 0 ? #imageLiteral(resourceName: "icon_star") : #imageLiteral(resourceName: "icon_star_empty")
         isPrivateBadgeView.isHidden = repo.isPrivate ? false : true
 

@@ -32,7 +32,10 @@ class MainViewController: UIViewController {
     private func getRepositories() {
         repoViewModel.getRepositories()
             .subscribe(
-                onNext: { self.dataSource.repositories = $0 },
+                onNext: {
+                    self.dataSource.repositories.append(contentsOf: $0.repos)
+                    self.dataSource.languages.append(contentsOf: $0.languages)
+                },
                 onError: { print($0) },
                 onCompleted: { self.tableView.reloadData() })
             .disposed(by: disposeBag)

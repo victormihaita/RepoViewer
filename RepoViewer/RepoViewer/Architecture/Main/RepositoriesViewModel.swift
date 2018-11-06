@@ -16,7 +16,7 @@ class RepositoriesViewModel {
     private let reposToFetch = 10
     private var cursor: String?
 
-    private var repositories = PublishSubject<[Repository.Language: [Repository]]>()
+    private var repositories = PublishSubject<(repos:[[Repository]], languages: [String])>()
     private var fetchedRepos: [Repository] = []
 
     init() {
@@ -24,7 +24,7 @@ class RepositoriesViewModel {
         fetchRepositories()
     }
 
-    public func getRepositories() -> PublishSubject<[Repository.Language: [Repository]]> {
+    public func getRepositories() -> PublishSubject<(repos:[[Repository]], languages: [String])> {
         return repositories
     }
 
@@ -33,30 +33,12 @@ class RepositoriesViewModel {
 
         disposableRepos = repoService?.fetchRepositories(count: reposToFetch, cursor: cursor)
             .subscribe(
-                onSuccess: { repos, newCursor in
-                    self.fetchedRepos.append(contentsOf: repos)
-                    self.repositories.onNext(self.sortedList(for: self.fetchedRepos))
+                onSuccess: { repos, languages, newCursor in
+                    self.repositories.onNext((repos: repos, languages: languages))
                     self.cursor = newCursor
                     newCursor != nil ? self.fetchRepositories() : self.repositories.onCompleted()
                 },
                 onError: { self.repositories.onError($0) })
-    }
-
-    private func sortedList(for repos: [Repository]) -> [Repository.Language: [Repository]] {
-        var repoDict: [Repository.Language: [Repository]] = [:]
-        repos.forEach { repo in
-            if let langs = repo.languages {
-                langs.forEach {
-                    if var repository = repoDict[$0] {
-                        repository.append(repo)
-                    } else {
-                        repoDict[$0] = [repo]
-                    }
-                }
-            }
-        }
-
-        return repoDict
     }
 
 }
