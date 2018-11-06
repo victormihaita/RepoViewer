@@ -13,7 +13,7 @@ class RepositoriesViewModel {
 
     private var repoService: RepositoriesService?
     private var disposableRepos: Disposable?
-    private let reposToFetch = 10
+    private let reposToFetch = 20
     private var cursor: String?
 
     private var repositories = PublishSubject<(repos:[[Repository]], languages: [String])>()

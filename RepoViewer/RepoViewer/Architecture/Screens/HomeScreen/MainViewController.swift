@@ -26,6 +26,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = dataSource
+        tableView.delegate = self
         getRepositories()
     }
 
@@ -39,6 +40,15 @@ class MainViewController: UIViewController {
                 onError: { print($0) },
                 onCompleted: { self.tableView.reloadData() })
             .disposed(by: disposeBag)
+    }
+
+}
+
+extension MainViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = RepositoryDetailsViewController.instantiate(from: .main)
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 }

@@ -24,8 +24,11 @@ extension AppDelegate {
 
 extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        let vc = RootViewController()
+        let navigationController = UINavigationController(rootViewController: vc)
+        navigationController.navigationBar.topItem?.title = "RepoViewer"
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = RootViewController()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
     }
