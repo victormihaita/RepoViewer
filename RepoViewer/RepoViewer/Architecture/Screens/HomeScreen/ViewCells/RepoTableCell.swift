@@ -21,7 +21,7 @@ class RepoTableCell: UITableViewCell, Reusable, NibLoadable {
         super.awakeFromNib()
     }
 
-    public func config(with repo: Repository) {
+    public func config(with repo: RepositoryShort) {
         nameLabel.text = repo.name
 
         if let desc = repo.description {

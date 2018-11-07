@@ -11,27 +11,28 @@ import RxSwift
 
 class RepositoriesViewModel {
 
-    private var repoService: RepositoriesService?
+    weak var delegate: RepositoriesDelegate?
+
     private var disposableRepos: Disposable?
     private let reposToFetch = 20
     private var cursor: String?
 
-    private var repositories = PublishSubject<(repos:[[Repository]], languages: [String])>()
-    private var fetchedRepos: [Repository] = []
+    private var repositories = PublishSubject<(repos:[[RepositoryShort]], languages: [String])>()
+    private var fetchedRepos: [RepositoryShort] = []
 
-    init() {
-        repoService = RepositoriesService()
+    init(_ factory: RepositoriesDelegate) {
+        delegate = factory
         fetchRepositories()
     }
 
-    public func getRepositories() -> PublishSubject<(repos:[[Repository]], languages: [String])> {
+    public func getRepositories() -> PublishSubject<(repos:[[RepositoryShort]], languages: [String])> {
         return repositories
     }
 
     private func fetchRepositories() {
         disposableRepos?.dispose()
 
-        disposableRepos = repoService?.fetchRepositories(count: reposToFetch, cursor: cursor)
+        disposableRepos = delegate?.fetchRepositories(count: reposToFetch, cursor: cursor)
             .subscribe(
                 onSuccess: { repos, languages, newCursor in
                     self.repositories.onNext((repos: repos, languages: languages))

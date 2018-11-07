@@ -11,7 +11,7 @@ import UIKit
 
 class RepositoriesTableDataSource: NSObject, UITableViewDataSource {
 
-    public var repositories: [[Repository]] = []
+    public var repositories: [[RepositoryShort]] = []
     public var languages: [String] = []
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

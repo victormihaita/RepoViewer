@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
         }
     }
 
-    private var repoViewModel = RepositoriesViewModel()
+    private var viewModel = RepositoriesViewModel(Injection.getRepositoriesServiceDelegate())
     private let dataSource = RepositoriesTableDataSource()
     private let disposeBag = DisposeBag()
 
@@ -31,7 +31,7 @@ class MainViewController: UIViewController {
     }
 
     private func getRepositories() {
-        repoViewModel.getRepositories()
+        viewModel.getRepositories()
             .subscribe(
                 onNext: {
                     self.dataSource.repositories.append(contentsOf: $0.repos)
@@ -47,7 +47,10 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = RepositoryDetailsViewController.instantiate(from: .main)
+        let vc = RepositoryDetailsViewController(
+            owner: dataSource.repositories[indexPath.section][indexPath.row].username,
+            name: dataSource.repositories[indexPath.section][indexPath.row].name
+        )
         navigationController?.pushViewController(vc, animated: true)
     }
 

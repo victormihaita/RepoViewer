@@ -40,21 +40,5 @@
             </objects>
             <point key="canvasLocation" x="1946" y="-703"/>
         </scene>
-        <!--Details-->
-        <scene sceneID="NeY-Wl-9El">
-            <objects>
-                <viewController storyboardIdentifier="RepositoryDetailsViewController" id="O4M-bP-one" customClass="RepositoryDetailsViewController" customModule="RepoViewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="G5R-W3-Uac">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="TCv-Lv-apI"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Details" id="MB2-rh-Vyg"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7mD-fP-VcC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1945" y="14"/>
-        </scene>
     </scenes>
 </document>

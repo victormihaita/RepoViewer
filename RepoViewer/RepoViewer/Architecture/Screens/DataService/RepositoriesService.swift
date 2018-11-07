@@ -9,9 +9,21 @@
 import Foundation
 import RxSwift
 
-class RepositoriesService {
+typealias RepoQueryResult = (repos:[[RepositoryShort]], languages: [String], cursor: String?)
 
-    typealias RepoQueryResult = (repos:[[Repository]], languages: [String], cursor: String?)
+protocol RepositoriesDelegate: class {
+    func fetchRepositories(count: Int, cursor: String?) -> Maybe<RepoQueryResult>
+}
+
+protocol RepositoryDelegate: class {
+    func fetchRepository(for owner: String, with name: String) -> Maybe<Repository>
+}
+
+class RepositoriesService: RepositoriesDelegate, RepositoryDelegate {
+
+    static func create() -> RepositoriesService {
+        return RepositoriesService()
+    }
 
     public func fetchRepositories(count: Int, cursor: String?) -> Maybe<RepoQueryResult> {
         let query = RepositoriesQuery(first: count, after: cursor)
@@ -23,12 +35,12 @@ class RepositoriesService {
             .observeOn(MainScheduler.instance)
     }
 
-    private func parse(_ data: RepositoriesQuery.Data) -> (repos: [Repository], cursor: String?) {
-        var repositories: [Repository] = []
+    private func parse(_ data: RepositoriesQuery.Data) -> (repos: [RepositoryShort], cursor: String?) {
+        var repositories: [RepositoryShort] = []
         if let repos = data.viewer.repositories.edges {
             for repo in repos {
                 if let rep = repo?.node {
-                    repositories.append(Repository(rep))
+                    repositories.append(RepositoryShort(rep))
                 }
             }
         }
@@ -36,8 +48,8 @@ class RepositoriesService {
         return (repos: repositories, cursor: data.viewer.repositories.edges?.last??.cursor)
     }
 
-    public func sortRepos(repos: [Repository], cursor: String?) -> RepoQueryResult {
-        var repoDict: [[Repository]] = []
+    private func sortRepos(repos: [RepositoryShort], cursor: String?) -> RepoQueryResult {
+        var repoDict: [[RepositoryShort]] = []
         var languages: [String] = []
         repos.forEach { repo in
             if let langs = repo.languages {
@@ -56,6 +68,15 @@ class RepositoriesService {
         }
 
         return (repos: repoDict, languages: languages, cursor: cursor)
+    }
+
+    public func fetchRepository(for owner: String, with name: String) -> Maybe<Repository> {
+        let query = RepositoryQuery(owner: owner, name: name)
+
+        return ApiClient.shared.fetch(query, cachePolicy: .returnCacheDataAndFetch)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .map { return Repository($0.repository) }
+            .observeOn(MainScheduler.instance)
     }
 
 }

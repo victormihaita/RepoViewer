@@ -34,6 +34,8 @@
 		BACCDCA7218E783A00EF70BF /* RepositoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDCA6218E783A00EF70BF /* RepositoriesViewModel.swift */; };
 		BACCDCA9218E828F00EF70BF /* RepositoriesTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDCA8218E828F00EF70BF /* RepositoriesTableDataSource.swift */; };
 		BACCDCCC2192515200EF70BF /* RepositoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDCCB2192515200EF70BF /* RepositoryDetailsViewController.swift */; };
+		BACCDCE821937A4900EF70BF /* RepositoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDCE721937A4900EF70BF /* RepositoryViewModel.swift */; };
+		BACCDCEC2193811C00EF70BF /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCDCEB2193811C00EF70BF /* Injection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		BACCDCA6218E783A00EF70BF /* RepositoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewModel.swift; sourceTree = "<group>"; };
 		BACCDCA8218E828F00EF70BF /* RepositoriesTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesTableDataSource.swift; sourceTree = "<group>"; };
 		BACCDCCB2192515200EF70BF /* RepositoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailsViewController.swift; sourceTree = "<group>"; };
+		BACCDCE721937A4900EF70BF /* RepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewModel.swift; sourceTree = "<group>"; };
+		BACCDCEB2193811C00EF70BF /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
 		D9A45FB7FB4C0586148F8202 /* Pods-RepoViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RepoViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-RepoViewer/Pods-RepoViewer.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,9 +178,7 @@
 				BA7631A0218DD45700929175 /* MainViewController.swift */,
 				BACCDCA8218E828F00EF70BF /* RepositoriesTableDataSource.swift */,
 				BACCDCA6218E783A00EF70BF /* RepositoriesViewModel.swift */,
-				BACCDCA4218E760500EF70BF /* RepositoriesService.swift */,
 				BACCDC93218E65D600EF70BF /* ViewCells */,
-				BACCDC9D218E683400EF70BF /* Model */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -245,19 +247,11 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		BACCDC9D218E683400EF70BF /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				BACCDC9E218E685000EF70BF /* Repositories.graphql */,
-				BACCDCA0218E6D9800EF70BF /* Repository.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		BACCDCC92192510700EF70BF /* DetailsScreen */ = {
 			isa = PBXGroup;
 			children = (
 				BACCDCCB2192515200EF70BF /* RepositoryDetailsViewController.swift */,
+				BACCDCE721937A4900EF70BF /* RepositoryViewModel.swift */,
 			);
 			path = DetailsScreen;
 			sourceTree = "<group>";
@@ -265,10 +259,30 @@
 		BACCDCCA2192510E00EF70BF /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				BACCDCEA21937B8B00EF70BF /* Model */,
+				BACCDCE921937B8100EF70BF /* DataService */,
 				BACCDCC92192510700EF70BF /* DetailsScreen */,
 				BA0E5B72218CFFF20013F5A6 /* HomeScreen */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		BACCDCE921937B8100EF70BF /* DataService */ = {
+			isa = PBXGroup;
+			children = (
+				BACCDCA4218E760500EF70BF /* RepositoriesService.swift */,
+				BACCDCEB2193811C00EF70BF /* Injection.swift */,
+			);
+			path = DataService;
+			sourceTree = "<group>";
+		};
+		BACCDCEA21937B8B00EF70BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BACCDC9E218E685000EF70BF /* Repositories.graphql */,
+				BACCDCA0218E6D9800EF70BF /* Repository.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,11 +446,13 @@
 				BACCDC96218E660200EF70BF /* RepoTableCell.swift in Sources */,
 				BA0AEA3D218D1221008AC723 /* AuthViewController.swift in Sources */,
 				BA0E5B5D218CFE5B0013F5A6 /* AppDelegate.swift in Sources */,
+				BACCDCEC2193811C00EF70BF /* Injection.swift in Sources */,
 				BA7631AA218DF75E00929175 /* ApiClient.swift in Sources */,
 				BA7631B1218DFBC300929175 /* API.swift in Sources */,
 				BACCDCA5218E760500EF70BF /* RepositoriesService.swift in Sources */,
 				BACCDCA1218E6D9800EF70BF /* Repository.swift in Sources */,
 				BA7631A3218DDDFB00929175 /* Utils.swift in Sources */,
+				BACCDCE821937A4900EF70BF /* RepositoryViewModel.swift in Sources */,
 				BACCDCA7218E783A00EF70BF /* RepositoriesViewModel.swift in Sources */,
 				BACCDCCC2192515200EF70BF /* RepositoryDetailsViewController.swift in Sources */,
 				BA7631AC218DFB0300929175 /* RxApollo.swift in Sources */,

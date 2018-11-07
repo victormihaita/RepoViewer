@@ -6,6 +6,9 @@ query Repositories($first: Int, $after: String) {
                 node {
                     id
                     name
+                    owner {
+                        login
+                    }
                     description
                     isPrivate
                     languages (first: 4) {
@@ -18,6 +21,27 @@ query Repositories($first: Int, $after: String) {
                     }
                 }
             }
+        }
+    }
+}
+
+query Repository ($owner: String!, $name: String!) {
+    repository(owner: $owner, name: $name) {
+        id
+        name
+        owner {
+            login
+            avatarUrl
+        }
+        description
+        isPrivate
+        languages (first: 4) {
+            nodes {
+                name
+            }
+        }
+        stargazers {
+            totalCount
         }
     }
 }
