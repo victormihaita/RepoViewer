@@ -1,0 +1,47 @@
+query Repositories($first: Int, $after: String) {
+    viewer {
+        repositories (first: $first, after: $after) {
+            edges {
+                cursor
+                node {
+                    id
+                    name
+                    owner {
+                        login
+                    }
+                    description
+                    isPrivate
+                    languages (first: 4) {
+                        nodes {
+                            name
+                        }
+                    }
+                    stargazers {
+                        totalCount
+                    }
+                }
+            }
+        }
+    }
+}
+
+query Repository ($owner: String!, $name: String!) {
+    repository(owner: $owner, name: $name) {
+        id
+        name
+        owner {
+            login
+            avatarUrl
+        }
+        description
+        isPrivate
+        languages (first: 4) {
+            nodes {
+                name
+            }
+        }
+        stargazers {
+            totalCount
+        }
+    }
+}

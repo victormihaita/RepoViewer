@@ -7,6 +7,7 @@ target 'RepoViewer' do
 
   # Pods for RepoViewer
   pod 'Apollo'
+  pod 'ApolloAlamofire'
   pod 'OAuthSwift'
   pod 'RxCocoa'
   pod 'RxSwift'
