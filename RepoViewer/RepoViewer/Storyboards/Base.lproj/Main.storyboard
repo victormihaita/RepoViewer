@@ -18,27 +18,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pj2-KR-HKp">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="SD8-cS-wFh"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Zni-Ue-zFe">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="XFU-Q7-NBp" firstAttribute="trailing" secondItem="Zni-Ue-zFe" secondAttribute="trailing" id="2fw-Bp-YOe"/>
+                            <constraint firstItem="pj2-KR-HKp" firstAttribute="trailing" secondItem="XFU-Q7-NBp" secondAttribute="trailing" id="4Xa-ay-TJj"/>
+                            <constraint firstItem="Zni-Ue-zFe" firstAttribute="top" secondItem="pj2-KR-HKp" secondAttribute="bottom" id="9un-u3-8y2"/>
                             <constraint firstItem="XFU-Q7-NBp" firstAttribute="bottom" secondItem="Zni-Ue-zFe" secondAttribute="bottom" id="BFX-o3-MO1"/>
                             <constraint firstItem="Zni-Ue-zFe" firstAttribute="leading" secondItem="XFU-Q7-NBp" secondAttribute="leading" id="cjS-yQ-BHa"/>
-                            <constraint firstItem="Zni-Ue-zFe" firstAttribute="top" secondItem="XFU-Q7-NBp" secondAttribute="top" id="r4E-zL-cba"/>
+                            <constraint firstItem="pj2-KR-HKp" firstAttribute="leading" secondItem="XFU-Q7-NBp" secondAttribute="leading" id="iBc-sV-gUr"/>
+                            <constraint firstItem="pj2-KR-HKp" firstAttribute="top" secondItem="XFU-Q7-NBp" secondAttribute="top" id="idu-Mm-Ezc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XFU-Q7-NBp"/>
                     </view>
                     <connections>
+                        <outlet property="searchBar" destination="pj2-KR-HKp" id="XH2-np-y59"/>
                         <outlet property="tableView" destination="Zni-Ue-zFe" id="3Tc-Hz-CXd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vmI-ev-dbP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1946" y="-703"/>
+            <point key="canvasLocation" x="1944.8" y="-703.89805097451278"/>
         </scene>
     </scenes>
 </document>

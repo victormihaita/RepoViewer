@@ -45,3 +45,30 @@ query Repository ($owner: String!, $name: String!) {
         }
     }
 }
+
+query Search($queryText: String!, $first: Int, $after: String, $type: SearchType!) {
+    search(first: $first, after: $after, type: $type, query: $queryText) {
+        edges {
+            cursor
+            node {
+                ... on Repository {
+                    id
+                    name
+                    owner {
+                        login
+                    }
+                    description
+                    isPrivate
+                    languages (first: 4) {
+                        nodes {
+                            name
+                        }
+                    }
+                    stargazers {
+                        totalCount
+                    }
+                }
+            }
+        }
+    }
+}

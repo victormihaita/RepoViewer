@@ -11,47 +11,56 @@ import RxSwift
 
 class MainViewController: UIViewController {
 
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.rowHeight = UITableView.automaticDimension
             tableView.estimatedRowHeight = 150
+            tableView.keyboardDismissMode = .onDrag
             tableView.register(RepoTableCell.self)
         }
     }
 
-    private var viewModel = RepositoriesViewModel(Injection.getRepositoriesServiceDelegate())
+    private var viewModel: RepositoriesViewModel!
     private let dataSource = RepositoriesTableDataSource()
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = RepositoriesViewModel(Injection.getRepositoriesServiceDelegate())
         tableView.dataSource = dataSource
-        tableView.delegate = self
-        getRepositories()
-    }
 
-    private func getRepositories() {
+        searchBar.rx.text.orEmpty
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .subscribe( onNext: {
+                $0 == "" ? self.viewModel.fetchViewerRepos() : self.viewModel.searchRepos(with: $0)
+                self.dataSource.repositories = []
+                self.dataSource.languages = []
+                self.tableView.reloadData() })
+            .disposed(by: disposeBag)
+
         viewModel.getRepositories()
             .subscribe(
                 onNext: {
                     self.dataSource.repositories.append(contentsOf: $0.repos)
                     self.dataSource.languages.append(contentsOf: $0.languages)
+                    self.tableView.reloadData()
                 },
                 onError: { print($0) },
                 onCompleted: { self.tableView.reloadData() })
             .disposed(by: disposeBag)
-    }
 
-}
-
-extension MainViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = RepositoryDetailsViewController(
-            owner: dataSource.repositories[indexPath.section][indexPath.row].username,
-            name: dataSource.repositories[indexPath.section][indexPath.row].name
-        )
-        navigationController?.pushViewController(vc, animated: true)
+        tableView.rx.itemSelected
+            .subscribe(onNext:{
+                let vc = RepositoryDetailsViewController(
+                    owner: self.dataSource.repositories[$0.section][$0.row].username,
+                    name: self.dataSource.repositories[$0.section][$0.row].name
+                )
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 
 }

@@ -31,6 +31,15 @@ struct RepositoryShort {
         username = data.owner.login
     }
 
+    init(_ data: SearchQuery.Data.Search.Edge.Node.AsRepository) {
+        name = data.name
+        description = data.description
+        isPrivate = data.isPrivate
+        languages = data.languages?.nodes?.map { Language(name: $0?.name) }
+        stars = data.stargazers.totalCount
+        username = data.owner.login
+    }
+
 }
 
 struct Repository {
