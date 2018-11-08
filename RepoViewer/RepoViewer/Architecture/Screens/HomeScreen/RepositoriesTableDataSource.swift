@@ -28,6 +28,7 @@ class RepositoriesTableDataSource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: RepoTableCell = tableView.dequeueCell(for: indexPath)
+        cell.selectionStyle = .none
         let repo = repositories[indexPath.section][indexPath.row]
         cell.config(with: repo)
         return cell

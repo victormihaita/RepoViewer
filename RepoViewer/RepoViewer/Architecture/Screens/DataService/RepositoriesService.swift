@@ -12,7 +12,8 @@ import RxSwift
 typealias RepoQueryResult = (repos:[[RepositoryShort]], languages: [String], cursor: String?)
 
 protocol RepositoriesDelegate: class {
-    func fetchRepositories(count: Int, cursor: String?) -> Maybe<RepoQueryResult>
+    func fetchRepositories(count: Int?, cursor: String?) -> Maybe<RepoQueryResult>
+    func searchRepositories(count: Int?, cursor: String?, type: SearchType!, query: String!) -> Maybe<RepoQueryResult>
 }
 
 protocol RepositoryDelegate: class {
@@ -25,8 +26,27 @@ class RepositoriesService: RepositoriesDelegate, RepositoryDelegate {
         return RepositoriesService()
     }
 
-    public func fetchRepositories(count: Int, cursor: String?) -> Maybe<RepoQueryResult> {
+    public func fetchRepository(for owner: String, with name: String) -> Maybe<Repository> {
+        let query = RepositoryQuery(owner: owner, name: name)
+
+        return ApiClient.shared.fetch(query, cachePolicy: .returnCacheDataAndFetch)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .map { return Repository($0.repository) }
+            .observeOn(MainScheduler.instance)
+    }
+
+    public func fetchRepositories(count: Int?, cursor: String?) -> Maybe<RepoQueryResult> {
         let query = RepositoriesQuery(first: count, after: cursor)
+
+        return ApiClient.shared.fetch(query, cachePolicy: .returnCacheDataAndFetch)
+            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .map { return self.parse($0) }
+            .map { return self.sortRepos(repos: $0.repos, cursor: $0.cursor) }
+            .observeOn(MainScheduler.instance)
+    }
+
+    public func searchRepositories(count: Int?, cursor: String?, type: SearchType!, query: String!) -> Maybe<RepoQueryResult> {
+        let query = SearchQuery(queryText: query, first: count, after: cursor, type: type)
 
         return ApiClient.shared.fetch(query, cachePolicy: .returnCacheDataAndFetch)
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
@@ -46,6 +66,19 @@ class RepositoriesService: RepositoriesDelegate, RepositoryDelegate {
         }
 
         return (repos: repositories, cursor: data.viewer.repositories.edges?.last??.cursor)
+    }
+
+    private func parse(_ data: SearchQuery.Data) -> (repos: [RepositoryShort], cursor: String?) {
+        var repositories: [RepositoryShort] = []
+        if let repos = data.search.edges {
+            for repo in repos {
+                if let rep = repo?.node?.asRepository {
+                    repositories.append(RepositoryShort(rep))
+                }
+            }
+        }
+
+        return (repos: repositories, cursor: data.search.edges?.last??.cursor)
     }
 
     private func sortRepos(repos: [RepositoryShort], cursor: String?) -> RepoQueryResult {
@@ -68,15 +101,6 @@ class RepositoriesService: RepositoriesDelegate, RepositoryDelegate {
         }
 
         return (repos: repoDict, languages: languages, cursor: cursor)
-    }
-
-    public func fetchRepository(for owner: String, with name: String) -> Maybe<Repository> {
-        let query = RepositoryQuery(owner: owner, name: name)
-
-        return ApiClient.shared.fetch(query, cachePolicy: .returnCacheDataAndFetch)
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-            .map { return Repository($0.repository) }
-            .observeOn(MainScheduler.instance)
     }
 
 }
