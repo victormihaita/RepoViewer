@@ -28,6 +28,10 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let signOutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(signOut))
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = signOutButton
+
         viewModel = RepositoriesViewModel(Injection.getRepositoriesServiceDelegate())
         tableView.dataSource = dataSource
 
@@ -61,6 +65,11 @@ class MainViewController: UIViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
+    }
+
+    @objc func signOut() {
+        KeychainService.removeApiToken(service: "ApiService", account: "userToken")
+        AppDelegate.shared.handleAppState()
     }
 
     func handle(_ error: Error) {

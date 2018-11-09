@@ -22,7 +22,7 @@ class ApiClient {
 
     private func resetApollo() {
         var headers: [String: String] = [:]
-        headers["Authorization"] = "Bearer \(UserDefaultsManager.getUserToken() ?? "INVALID")"
+        headers["Authorization"] = "Bearer \(KeychainService.loadApiToken(service: "ApiService", account: "userToken") ?? "INVALID")"
 
         let transport = AlamofireTransport(url: apolloURL!, headers: headers)
         apollo = ApolloClient(networkTransport: transport)
@@ -35,7 +35,7 @@ class ApiClient {
                 guard error.isAuthenticationError else {
                     return Maybe.error(error)
                 }
-                UserDefaultsManager.removeUserToken()
+                KeychainService.removeApiToken(service: "ApiService", account: "userToken")
                 AppDelegate.shared.handleAppState()
                 return Maybe.error(error)
         }

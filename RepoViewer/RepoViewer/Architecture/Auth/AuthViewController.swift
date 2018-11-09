@@ -60,8 +60,8 @@ class AuthViewController: UIViewController {
             withCallbackURL: URL(string: Utils.getCredentials(in: "Auth", for: "callbackURL")!),
             scope: "user,repo",
             state: state,
-            success: { credential, response, parameters in
-                UserDefaultsManager.setUserToken(token: credential.oauthToken)
+            success: { credential, _, _ in
+                KeychainService.saveApiToken(service: "ApiService", account: "userToken", data: credential.oauthToken)
                 AppDelegate.shared.handleAppState()
             },
             failure: { error in
