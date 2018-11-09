@@ -48,7 +48,7 @@ class MainViewController: UIViewController {
                     self.dataSource.languages.append(contentsOf: $0.languages)
                     self.tableView.reloadData()
                 },
-                onError: { print($0) },
+                onError: { self.handle($0) },
                 onCompleted: { self.tableView.reloadData() })
             .disposed(by: disposeBag)
 
@@ -61,6 +61,18 @@ class MainViewController: UIViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
             })
             .disposed(by: disposeBag)
+    }
+
+    func handle(_ error: Error) {
+        Utils.showPopUp(
+            parentVC: self,
+            title: "Error",
+            message: error.localizedDescription,
+            leftButtonTitle: "Cancel",
+            rightButtonTitle: "Retry",
+            leftButtonAction: {},
+            rightButtonAction: { self.viewModel.fetchViewerRepos() }
+        )
     }
 
 }

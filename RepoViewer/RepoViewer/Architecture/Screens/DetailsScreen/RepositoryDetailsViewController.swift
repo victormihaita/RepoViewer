@@ -44,7 +44,7 @@ class RepositoryDetailsViewController: UIViewController {
         viewModel.getRepository()
             .subscribe(
                 onNext: { self.config(with: $0) },
-                onError: { print($0) },
+                onError: { self.handle($0) },
                 onCompleted: {  })
             .disposed(by: disposeBag)
     }
@@ -211,6 +211,18 @@ class RepositoryDetailsViewController: UIViewController {
                 completion(data)
             }
         }.resume()
+    }
+
+    func handle(_ error: Error) {
+        Utils.showPopUp(
+            parentVC: self,
+            title: "Error",
+            message: error.localizedDescription,
+            leftButtonTitle: "Cancel",
+            rightButtonTitle: "Retry",
+            leftButtonAction: {},
+            rightButtonAction: { self.viewModel.fetchRepo(owner: self.repoOwner, name: self.repoName) }
+        )
     }
 
 }

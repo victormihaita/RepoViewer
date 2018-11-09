@@ -27,6 +27,10 @@ class RepositoryViewModel {
         return repository
     }
 
+    public func fetchRepo(owner: String, name: String) {
+        self.fetchRepository(for: owner, name: name)
+    }
+
     private func fetchRepository(for owner: String, name: String) {
 
         delegate?.fetchRepository(for: owner, with: name)
