@@ -157,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				BA0AEA3C218D1221008AC723 /* AuthViewController.swift */,
+				BA76319C218DD32700929175 /* KeychainService.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -184,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				BACCDC9A218E664900EF70BF /* Protocols */,
-				BA76319C218DD32700929175 /* KeychainService.swift */,
 				BA7631A2218DDDFB00929175 /* Utils.swift */,
 				BA7631A4218DE19300929175 /* Credentials.plist */,
 			);

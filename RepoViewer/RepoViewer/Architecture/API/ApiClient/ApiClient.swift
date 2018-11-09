@@ -17,15 +17,18 @@ class ApiClient {
     private let apolloURL = URL(string: Utils.getCredentials(in: "GraphQL", for: "apiURL")!)
 
     init() {
-        resetApollo()
+        setApollo()
     }
 
-    private func resetApollo() {
+    private func setApollo() {
         var headers: [String: String] = [:]
-        headers["Authorization"] = "Bearer \(KeychainService.loadApiToken(service: "ApiService", account: "userToken") ?? "INVALID")"
+        if let token = KeychainService.loadApiToken(service: "ApiService", account: "userToken") {
+            headers["Authorization"] = "Bearer \(token)"
+        }
 
         let transport = AlamofireTransport(url: apolloURL!, headers: headers)
-        apollo = ApolloClient(networkTransport: transport)
+        let apolloStore = ApolloStore(cache: InMemoryNormalizedCache())
+        apollo = ApolloClient(networkTransport: transport, store: apolloStore)
         apollo.cacheKeyForObject = { $0["id"] }
     }
 
