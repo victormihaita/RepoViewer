@@ -16,19 +16,24 @@ class Utils {
         title: String,
         message: String,
         leftButtonTitle: String,
-        rightButtonTitle: String,
+        rightButtonTitle: String?,
         leftButtonAction: @escaping () -> Void,
         rightButtonAction: @escaping () -> Void?) {
 
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
         let leftButtonAction = UIAlertAction(title: leftButtonTitle, style: .cancel) { _ in
             leftButtonAction()
         }
-        let rightButtonAction = UIAlertAction(title: rightButtonTitle, style: .default) { _ in
-            rightButtonAction()
-        }
         alert.addAction(leftButtonAction)
-        alert.addAction(rightButtonAction)
+
+        if let rightText = rightButtonTitle {
+            let rightButtonAction = UIAlertAction(title: rightText, style: .default) { _ in
+                rightButtonAction()
+            }
+            alert.addAction(rightButtonAction)
+
+        }
 
         parentVC.present(alert, animated: true, completion: nil)
     }
