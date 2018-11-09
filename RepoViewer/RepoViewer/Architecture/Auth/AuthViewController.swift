@@ -62,7 +62,7 @@ class AuthViewController: UIViewController {
             state: state,
             success: { credential, response, parameters in
                 UserDefaultsManager.setUserToken(token: credential.oauthToken)
-                AppDelegate.shared.rootViewController.handleAppState()
+                AppDelegate.shared.handleAppState()
             },
             failure: { error in
                 Utils.showPopUp(

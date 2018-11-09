@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--RepoViewer-->
         <scene sceneID="6GM-PF-qpU">
             <objects>
                 <viewController storyboardIdentifier="MainViewController" id="KvG-Vf-7uf" customClass="MainViewController" customModule="RepoViewer" customModuleProvider="target" sceneMemberID="viewController">
@@ -42,6 +42,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XFU-Q7-NBp"/>
                     </view>
+                    <navigationItem key="navigationItem" title="RepoViewer" id="j2B-TY-w2e"/>
                     <connections>
                         <outlet property="searchBar" destination="pj2-KR-HKp" id="XH2-np-y59"/>
                         <outlet property="tableView" destination="Zni-Ue-zFe" id="3Tc-Hz-CXd"/>
@@ -49,7 +50,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vmI-ev-dbP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1944.8" y="-703.89805097451278"/>
+            <point key="canvasLocation" x="3071" y="-707"/>
         </scene>
     </scenes>
 </document>

@@ -17,21 +17,33 @@ class ApiClient {
     private let apolloURL = URL(string: Utils.getCredentials(in: "GraphQL", for: "apiURL")!)
 
     init() {
+        resetApollo()
+    }
+
+    private func resetApollo() {
         var headers: [String: String] = [:]
         headers["Authorization"] = "Bearer \(UserDefaultsManager.getUserToken() ?? "INVALID")"
-        let url = URL(string: "https://api.github.com/graphql")
 
-        let transport = AlamofireTransport(url: url!, headers: headers)
+        let transport = AlamofireTransport(url: apolloURL!, headers: headers)
         apollo = ApolloClient(networkTransport: transport)
         apollo.cacheKeyForObject = { $0["id"] }
     }
 
     public func fetch<T: GraphQLQuery>(_ query: T, cachePolicy: CachePolicy) -> Maybe<T.Data> {
         return apollo.rx.fetch(query: query, cachePolicy: cachePolicy)
+            .catchError { error in
+                guard error.isAuthenticationError else {
+                    return Maybe.error(error)
+                }
+                UserDefaultsManager.removeUserToken()
+                AppDelegate.shared.handleAppState()
+                return Maybe.error(error)
+        }
     }
+}
 
-    public func perform<T: GraphQLMutation>(_ mutation: T) -> Maybe<T.Data> {
-        return apollo.rx.perform(mutation: mutation)
+extension Error {
+    var isAuthenticationError: Bool {
+        return (self as NSError).description.contains("401")
     }
-
 }
