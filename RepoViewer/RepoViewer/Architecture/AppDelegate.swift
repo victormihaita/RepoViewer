@@ -22,7 +22,7 @@ extension AppDelegate {
     }
 
     public func handleAppState() {
-        UserDefaultsManager.getUserToken() != nil ? showMainApp() : showAuth()
+        KeychainService.loadApiToken(service: "ApiService", account: "userToken") != nil ? showMainApp() : showAuth()
     }
 
     private func showAuth() {
