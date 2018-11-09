@@ -18,10 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RepoViewer_logo" translatesAutoresizingMaskIntoConstraints="NO" id="TkF-6p-zce">
+                                <rect key="frame" x="87.5" y="233.5" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="Ume-Os-EzB"/>
+                                    <constraint firstAttribute="width" constant="200" id="hys-GI-kFd"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZUZ-Ki-bbK">
-                                <rect key="frame" x="100" y="317.5" width="175" height="32"/>
+                                <rect key="frame" x="100" y="478.5" width="175" height="32"/>
                                 <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                <size key="titleShadowOffset" width="20" height="20"/>
                                 <state key="normal" title="Sign in with GitHub">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -29,8 +37,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ZUZ-Ki-bbK" firstAttribute="centerY" secondItem="Bep-re-lCs" secondAttribute="centerY" id="7Wo-51-MdL"/>
+                            <constraint firstItem="TkF-6p-zce" firstAttribute="centerX" secondItem="Bep-re-lCs" secondAttribute="centerX" id="BXB-Cm-B2t"/>
+                            <constraint firstItem="TkF-6p-zce" firstAttribute="centerY" secondItem="Bep-re-lCs" secondAttribute="centerY" id="DXa-Kv-gyi"/>
                             <constraint firstItem="ZUZ-Ki-bbK" firstAttribute="centerX" secondItem="Bep-re-lCs" secondAttribute="centerX" id="F0C-cE-yE0"/>
+                            <constraint firstItem="ZUZ-Ki-bbK" firstAttribute="top" secondItem="TkF-6p-zce" secondAttribute="bottom" constant="45" id="gxf-Dm-WEo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gaE-G6-buL"/>
                     </view>
@@ -43,4 +53,7 @@
             <point key="canvasLocation" x="166" y="116"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="RepoViewer_logo" width="258" height="264"/>
+    </resources>
 </document>
