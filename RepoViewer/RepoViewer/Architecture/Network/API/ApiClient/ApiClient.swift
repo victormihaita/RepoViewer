@@ -20,9 +20,10 @@ class ApiClient {
         setApollo()
     }
 
+    // MARK: ApolloClient initializer
     private func setApollo() {
         var headers: [String: String] = [:]
-        if let token = KeychainService.loadApiToken(service: "ApiService", account: "userToken") {
+        if let token = TokenManager.loadApiToken(service: "ApiService", account: "userToken") {
             headers["Authorization"] = "Bearer \(token)"
         }
 
@@ -38,7 +39,7 @@ class ApiClient {
                 guard error.isAuthenticationError else {
                     return Maybe.error(error)
                 }
-                KeychainService.removeApiToken(service: "ApiService", account: "userToken")
+                TokenManager.removeApiToken(service: "ApiService", account: "userToken")
                 AppDelegate.shared.handleAppState()
                 return Maybe.error(error)
         }

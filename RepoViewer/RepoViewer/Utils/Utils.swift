@@ -46,5 +46,4 @@ class Utils {
         return authCredentials[key]
     }
 
-
 }

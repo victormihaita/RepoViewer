@@ -44,6 +44,7 @@ class AuthViewController: UIViewController {
             .disposed(by: disposeBag)
     }
 
+    // MARK: GitHub Auth using the params set in `viewDidLoad()`
     func gitHubAuth(with parameters: [OAuthParameters: String]){
         oAuthSwift = OAuth2Swift(
             consumerKey:    parameters[.consumerKey]!,
@@ -61,7 +62,7 @@ class AuthViewController: UIViewController {
             scope: "user,repo",
             state: state,
             success: { credential, _, _ in
-                KeychainService.saveApiToken(service: "ApiService", account: "userToken", data: credential.oauthToken)
+                TokenManager.saveApiToken(service: "ApiService", account: "userToken", data: credential.oauthToken)
                 AppDelegate.shared.handleAppState()
             },
             failure: { error in

@@ -31,6 +31,7 @@ class RepositoryViewModel {
         self.fetchRepository(for: owner, name: name)
     }
 
+    // MARK: Fetch repositories from `RepositoriesService`
     private func fetchRepository(for owner: String, name: String) {
 
         delegate?.fetchRepository(for: owner, with: name)

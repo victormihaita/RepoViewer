@@ -87,6 +87,14 @@ class RepositoryDetailsViewController: UIViewController {
     }
 
     private func initRepoDetailsSection() {
+        initTitleView()
+        initDescriptionView()
+        initStarsView()
+        initLockedView()
+        initLanguagesView()
+    }
+
+    private func initTitleView() {
         titleLabel = UILabel()
         titleLabel.textColor = .black
         titleLabel.textAlignment = .center
@@ -99,8 +107,10 @@ class RepositoryDetailsViewController: UIViewController {
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -14),
             titleLabel.leadingAnchor.constraint(equalTo: ownerImageView.trailingAnchor, constant: 14),
             titleLabel.topAnchor.constraint(equalTo: ownerImageView.topAnchor)
-        ])
+            ])
+    }
 
+    private func initDescriptionView() {
         descriptionLabel = UILabel()
         descriptionLabel.textColor = .black
         descriptionLabel.textAlignment = .center
@@ -114,8 +124,10 @@ class RepositoryDetailsViewController: UIViewController {
             descriptionLabel.leadingAnchor.constraint(equalTo: ownerImageView.trailingAnchor, constant: 14),
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 24),
             descriptionLabel.bottomAnchor.constraint(equalTo: ownerLabel.bottomAnchor)
-        ])
+            ])
+    }
 
+    private func initStarsView() {
         starsView = UIImageView()
         starsView.isHidden = false
         starsView.clipsToBounds = true
@@ -141,8 +153,10 @@ class RepositoryDetailsViewController: UIViewController {
             starsLabel.trailingAnchor.constraint(equalTo: starsView.leadingAnchor, constant: -2),
             starsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
             starsLabel.heightAnchor.constraint(equalTo: starsView.heightAnchor)
-        ])
+            ])
+    }
 
+    private func initLockedView() {
         lockedView = UIImageView()
         lockedView.isHidden = false
         lockedView.clipsToBounds = true
@@ -154,8 +168,10 @@ class RepositoryDetailsViewController: UIViewController {
             lockedView.trailingAnchor.constraint(equalTo: starsLabel.leadingAnchor, constant: -14),
             lockedView.heightAnchor.constraint(equalToConstant: 20),
             lockedView.widthAnchor.constraint(equalToConstant: 20)
-        ])
+            ])
+    }
 
+    private func initLanguagesView() {
         stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
@@ -167,7 +183,7 @@ class RepositoryDetailsViewController: UIViewController {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: starsView.bottomAnchor, constant: 8),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -14)
-        ])
+            ])
     }
 
     private func config(with repository: Repository) {

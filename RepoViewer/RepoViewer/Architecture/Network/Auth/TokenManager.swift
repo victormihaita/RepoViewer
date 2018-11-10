@@ -1,5 +1,5 @@
 //
-//  KeychainService.swift
+//  TokenManager.swift
 //  RepoViewer
 //
 //  Created by Victor Mihaita on 03/11/2018.
@@ -9,8 +9,9 @@
 import Foundation
 import Security
 
-class KeychainService {
+class TokenManager {
 
+    // MARK: Retrieve the stored token from KeyChain
     static func loadApiToken(service: String, account: String) -> String? {
         var dataTypeRef: CFTypeRef?
         let status = SecItemCopyMatching(modifierQuery(service: service, account: account), &dataTypeRef)
@@ -23,6 +24,7 @@ class KeychainService {
         }
     }
 
+    // MARK: Save token to KeyChain
     static func saveApiToken(service: String, account: String, data: String) {
         guard let dataFromString = data.data(using: .utf8, allowLossyConversion: false) else {
             return
@@ -37,6 +39,7 @@ class KeychainService {
         checkError(status)
     }
 
+    //MARK: Delete token from KeyChain
     static func removeApiToken(service: String, account: String) {
         let status = SecItemDelete(modifierQuery(service: service, account: account))
         checkError(status)

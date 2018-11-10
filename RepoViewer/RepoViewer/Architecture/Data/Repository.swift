@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// MARK: Object model used for the repository list and search
+
 struct RepositoryShort {
 
     struct Language: Hashable {
@@ -41,6 +43,8 @@ struct RepositoryShort {
     }
 
 }
+
+// MARK: Object model used for repository details
 
 struct Repository {
 
