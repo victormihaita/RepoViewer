@@ -1,9 +1,9 @@
 # RepoViewer
 iOS Application that displays the Git repositories of the user/organization. 
 
-![screenshot](https://imgur.com/a/tJxSo3y)
-![screenshot](https://imgur.com/a/rCherEn)
-![screenshot](https://imgur.com/a/B2OB6cU)
+![screenshot](https://github.com/victormihaita/RepoViewer/blob/develop/Screenshot%202018-11-10%20at%2000.23.10.jpg)
+![screenshot](https://github.com/victormihaita/RepoViewer/blob/develop/Screenshot%202018-11-10%20at%2000.23.47.jpg)
+![screenshot](https://github.com/victormihaita/RepoViewer/blob/develop/Screenshot%202018-11-10%20at%2000.24.25.jpg)
 
 ### Features
 * View with a list of repositories for the user/organization
