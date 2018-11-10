@@ -39,6 +39,7 @@ class RepositoriesViewModel {
         searchRepositories(with: query)
     }
 
+    // MARK: Fetch repositories from `RepositoriesService`
     private func fetchRepositories() {
         disposableRepos?.dispose()
         disposableRepos = delegate?.fetchRepositories(count: reposToFetch, cursor: cursor)
@@ -50,6 +51,7 @@ class RepositoriesViewModel {
                 onError: { self.repositories.onError($0) })
     }
 
+    // MARK: Fetch repositories from `RepositoriesService` with given query
     private func searchRepositories(with query: String) {
         disposableSearch?.dispose()
         disposableSearch = delegate?.searchRepositories(count: reposToFetch, cursor: cursor, type: .repository, query: query)

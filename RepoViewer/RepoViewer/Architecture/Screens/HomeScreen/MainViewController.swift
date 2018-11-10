@@ -35,6 +35,25 @@ class MainViewController: UIViewController {
         viewModel = RepositoriesViewModel(Injection.getRepositoriesServiceDelegate())
         tableView.dataSource = dataSource
 
+        initSearchBar()
+        getFetchedRepos()
+        observeItemSelection()
+    }
+
+    private func getFetchedRepos() {
+        viewModel.getRepositories()
+            .subscribe(
+                onNext: {
+                    self.dataSource.repositories.append(contentsOf: $0.repos)
+                    self.dataSource.languages.append(contentsOf: $0.languages)
+                    self.tableView.reloadData()
+            },
+                onError: { self.handle($0) },
+                onCompleted: { self.tableView.reloadData() })
+            .disposed(by: disposeBag)
+    }
+
+    private func initSearchBar() {
         searchBar.rx.text.orEmpty
             .throttle(0.5, scheduler: MainScheduler.instance)
             .distinctUntilChanged()
@@ -44,18 +63,9 @@ class MainViewController: UIViewController {
                 self.dataSource.languages = []
                 self.tableView.reloadData() })
             .disposed(by: disposeBag)
+    }
 
-        viewModel.getRepositories()
-            .subscribe(
-                onNext: {
-                    self.dataSource.repositories.append(contentsOf: $0.repos)
-                    self.dataSource.languages.append(contentsOf: $0.languages)
-                    self.tableView.reloadData()
-                },
-                onError: { self.handle($0) },
-                onCompleted: { self.tableView.reloadData() })
-            .disposed(by: disposeBag)
-
+    private func observeItemSelection() {
         tableView.rx.itemSelected
             .subscribe(onNext:{
                 let vc = RepositoryDetailsViewController(
@@ -68,7 +78,7 @@ class MainViewController: UIViewController {
     }
 
     @objc func signOut() {
-        KeychainService.removeApiToken(service: "ApiService", account: "userToken")
+        TokenManager.removeApiToken(service: "ApiService", account: "userToken")
         AppDelegate.shared.handleAppState()
     }
 

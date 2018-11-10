@@ -14,7 +14,7 @@
 		BA0E5B64218CFE5D0013F5A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA0E5B63218CFE5D0013F5A6 /* Assets.xcassets */; };
 		BA0E5B67218CFE5D0013F5A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA0E5B65218CFE5D0013F5A6 /* LaunchScreen.storyboard */; };
 		BA0E5B74218D00150013F5A6 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA0E5B73218D00150013F5A6 /* Auth.storyboard */; };
-		BA76319D218DD32700929175 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76319C218DD32700929175 /* KeychainService.swift */; };
+		BA76319D218DD32700929175 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76319C218DD32700929175 /* TokenManager.swift */; };
 		BA76319F218DD3E700929175 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA76319E218DD3E700929175 /* Storyboard.swift */; };
 		BA7631A1218DD45700929175 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7631A0218DD45700929175 /* MainViewController.swift */; };
 		BA7631A3218DDDFB00929175 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7631A2218DDDFB00929175 /* Utils.swift */; };
@@ -48,7 +48,7 @@
 		BA0E5B66218CFE5D0013F5A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA0E5B68218CFE5D0013F5A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA0E5B73218D00150013F5A6 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
-		BA76319C218DD32700929175 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		BA76319C218DD32700929175 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		BA76319E218DD3E700929175 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		BA7631A0218DD45700929175 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BA7631A2218DDDFB00929175 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				BA0E5B6E218CFF190013F5A6 /* Architecture */,
-				BA763199218DD2F900929175 /* Library */,
+				BA763199218DD2F900929175 /* Utils */,
 				BA0E5B75218D00560013F5A6 /* Resources */,
 				BA0E5B6F218CFF870013F5A6 /* Storyboards */,
 				BA0E5B68218CFE5D0013F5A6 /* Info.plist */,
@@ -135,8 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				BA0E5B5C218CFE5B0013F5A6 /* AppDelegate.swift */,
-				BA7631A6218DF60F00929175 /* API */,
-				BA0E5B70218CFFE30013F5A6 /* Auth */,
+				BA126AED21978BAC0051CBF3 /* Network */,
+				BA126AEC21978BA60051CBF3 /* Data */,
 				BACCDCCA2192510E00EF70BF /* Screens */,
 			);
 			path = Architecture;
@@ -157,7 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				BA0AEA3C218D1221008AC723 /* AuthViewController.swift */,
-				BA76319C218DD32700929175 /* KeychainService.swift */,
+				BA76319C218DD32700929175 /* TokenManager.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -181,14 +181,34 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		BA763199218DD2F900929175 /* Library */ = {
+		BA126AEC21978BA60051CBF3 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BACCDC9E218E685000EF70BF /* Repositories.graphql */,
+				BACCDCA0218E6D9800EF70BF /* Repository.swift */,
+				BACCDCA4218E760500EF70BF /* RepositoriesService.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		BA126AED21978BAC0051CBF3 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				BA7631A6218DF60F00929175 /* API */,
+				BA0E5B70218CFFE30013F5A6 /* Auth */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		BA763199218DD2F900929175 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				BACCDC9A218E664900EF70BF /* Protocols */,
+				BACCDCEB2193811C00EF70BF /* Injection.swift */,
 				BA7631A2218DDDFB00929175 /* Utils.swift */,
 				BA7631A4218DE19300929175 /* Credentials.plist */,
 			);
-			path = Library;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		BA7631A6218DF60F00929175 /* API */ = {
@@ -248,30 +268,10 @@
 		BACCDCCA2192510E00EF70BF /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				BACCDCEA21937B8B00EF70BF /* Model */,
-				BACCDCE921937B8100EF70BF /* DataService */,
 				BACCDCC92192510700EF70BF /* DetailsScreen */,
 				BA0E5B72218CFFF20013F5A6 /* HomeScreen */,
 			);
 			path = Screens;
-			sourceTree = "<group>";
-		};
-		BACCDCE921937B8100EF70BF /* DataService */ = {
-			isa = PBXGroup;
-			children = (
-				BACCDCA4218E760500EF70BF /* RepositoriesService.swift */,
-				BACCDCEB2193811C00EF70BF /* Injection.swift */,
-			);
-			path = DataService;
-			sourceTree = "<group>";
-		};
-		BACCDCEA21937B8B00EF70BF /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				BACCDC9E218E685000EF70BF /* Repositories.graphql */,
-				BACCDCA0218E6D9800EF70BF /* Repository.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,7 +365,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh codegen:generate RepoViewer/Architecture/API/Generated/API.swift --queries=\"$(find . -name '*.graphql')\" --passthroughCustomScalars --schema=RepoViewer/Architecture/API/Generated/schema.json\n";
+			shellScript = "APOLLO_FRAMEWORK_PATH=\"$(eval find $FRAMEWORK_SEARCH_PATHS -name \"Apollo.framework\" -maxdepth 1)\"\n\nif [ -z \"$APOLLO_FRAMEWORK_PATH\" ]; then\necho \"error: Couldn't find Apollo.framework in FRAMEWORK_SEARCH_PATHS; make sure to add the framework to your project.\"\nexit 1\nfi\n\ncd \"${SRCROOT}\"\n$APOLLO_FRAMEWORK_PATH/check-and-run-apollo-cli.sh apollo codegen:generate RepoViewer/Architecture/API/Generated/API.swift --queries=\"$(find . -name '*.graphql')\" --passthroughCustomScalars --schema=RepoViewer/Architecture/API/Generated/schema.json\n";
 		};
 		EA9CA157AC5542C58636C82D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -446,7 +446,7 @@
 				BACCDCCC2192515200EF70BF /* RepositoryDetailsViewController.swift in Sources */,
 				BA7631AC218DFB0300929175 /* RxApollo.swift in Sources */,
 				BA7631A1218DD45700929175 /* MainViewController.swift in Sources */,
-				BA76319D218DD32700929175 /* KeychainService.swift in Sources */,
+				BA76319D218DD32700929175 /* TokenManager.swift in Sources */,
 				BACCDC9C218E665D00EF70BF /* NibLoadable.swift in Sources */,
 				BACCDCA9218E828F00EF70BF /* RepositoriesTableDataSource.swift in Sources */,
 			);

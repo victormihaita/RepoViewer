@@ -15,14 +15,16 @@ class AppDelegate: UIResponder {
 }
 
 extension AppDelegate {
+    // MARK: OAuth implementation
     func applicationHandle(url: URL) {
         if (url.host == "oauth-callback") {
             OAuth2Swift.handle(url: url)
         }
     }
 
+    // MARK: Decides is the `Auth` or `MainApp` should be displayed based on the token
     public func handleAppState() {
-        KeychainService.loadApiToken(service: "ApiService", account: "userToken") != nil ? showMainApp() : showAuth()
+        TokenManager.loadApiToken(service: "ApiService", account: "userToken") != nil ? showMainApp() : showAuth()
     }
 
     private func showAuth() {
