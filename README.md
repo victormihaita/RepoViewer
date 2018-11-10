@@ -7,7 +7,6 @@ iOS Application that displays the Git repositories of the user/organization.
   - Sections are sorted by language with most to least repos in descending order
   - Repositories within each section are sorted by most starred in descending
   - Repository live search
-order
 
 2. Detail view with extra details about the repository
 
